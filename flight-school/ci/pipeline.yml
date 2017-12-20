@@ -1,0 +1,14 @@
+resources:
+- name: app
+  type: git
+  source:
+    uri: https://github.com/MuneebBaderoen/flight-school
+    branch: docker
+
+jobs:
+- name: test-app
+  plan:
+  - get: app
+    trigger: true
+  - task: tests
+    file: app/build.yml
