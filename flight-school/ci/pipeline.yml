@@ -1,14 +1,31 @@
+resource_types:
+  - name: pull-request
+    type: docker-image
+    source:
+      repository: jtarchie/pr
+
 resources:
 - name: app
-  type: git
+  type: pull-request
   source:
-    uri: https://github.com/MuneebBaderoen/flight-school
-    branch: docker
+    access_token: {{github_access_token}}
+    private_key:  {{github_private_key}}
+    repo: MuneebBaderoen/concourse
+    base: master
 
 jobs:
 - name: test-app
   plan:
   - get: app
     trigger: true
-  - task: tests
-    file: app/build.yml
+  - put: app
+    params:
+      path: app
+      status: pending
+  - task: run-tests
+    file: app/flight-school/build.yml
+    on_success:
+      put: app
+      params:
+        path: app
+        status: success

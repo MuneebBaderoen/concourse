@@ -2,7 +2,7 @@
 
 set -e -x
 
-pushd app
+pushd app/flight-school
   bundle install
   bundle exec rspec
 popd
