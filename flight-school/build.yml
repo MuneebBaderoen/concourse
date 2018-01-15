@@ -12,4 +12,4 @@ inputs:
 - name: app
 
 run:
-  path: app/ci/test.sh
+  path: app/flight-school/ci/test.sh

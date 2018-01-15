@@ -36,6 +36,13 @@ services:
     environment:
       CONCOURSE_TSA_HOST: concourse-web
 
+  nexus-server:
+    image: sonatype/nexus3
+    volumes:
+      - .docker/nexus-data:/nexus-data
+    ports:
+      - "8081:8081"
+
   fly:
     build: ./flight-school
     volumes:
