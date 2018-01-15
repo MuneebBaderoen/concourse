@@ -18,6 +18,10 @@ jobs:
   plan:
   - get: app
     trigger: true
+  - put: app
+    params:
+      path: app
+      status: pending
   - task: run-tests
     file: app/flight-school/build.yml
     on_success:
