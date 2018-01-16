@@ -23,7 +23,17 @@ jobs:
       path: app
       status: pending
   - task: run-tests
-    file: app/flight-school/build.yml
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: ruby
+          tag: 2.4.1
+      inputs:
+        - name: app
+      run:
+        path: app/flight-school/ci/test.sh
     on_success:
       put: app
       params:
